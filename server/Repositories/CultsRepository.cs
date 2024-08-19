@@ -17,9 +17,18 @@ public class CultsRepository
     cults (name, fee, description, coverImg, leaderId)
     VALUES(@Name, @Fee, @Description, @CoverImg, @LeaderId);
 
-    SELECT * FROM cults WHERE id = LAST_INSERT_ID();";
+    SELECT
+    cults.*,
+    accounts.*
+    FROM cults
+    JOIN accounts ON accounts.id = cults.leaderId
+    WHERE cults.id = LAST_INSERT_ID();";
 
-    Cult cult = _db.Query<Cult>(sql, cultData).FirstOrDefault();
+    Cult cult = _db.Query<Cult, Profile, Cult>(sql, (cult, profile) =>
+    {
+      cult.Leader = profile;
+      return cult;
+    }, cultData).FirstOrDefault();
     return cult;
   }
 }
