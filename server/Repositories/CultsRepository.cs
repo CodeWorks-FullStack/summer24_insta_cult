@@ -25,11 +25,7 @@ public class CultsRepository
     JOIN accounts ON accounts.id = cults.leaderId
     WHERE cults.id = LAST_INSERT_ID();";
 
-    Cult cult = _db.Query<Cult, Profile, Cult>(sql, (cult, profile) =>
-    {
-      cult.Leader = profile;
-      return cult;
-    }, cultData).FirstOrDefault();
+    Cult cult = _db.Query<Cult, Profile, Cult>(sql, JoinLeader, cultData).FirstOrDefault();
     return cult;
   }
 
@@ -42,13 +38,15 @@ public class CultsRepository
     FROM cults
     JOIN accounts ON accounts.id = cults.leaderId;";
 
-    List<Cult> cults = _db.Query<Cult, Profile, Cult>(sql, (cult, profile) =>
-    {
-      cult.Leader = profile;
-      return cult;
-    }).ToList();
+    List<Cult> cults = _db.Query<Cult, Profile, Cult>(sql, JoinLeader).ToList();
 
     return cults;
+  }
+
+  private Cult JoinLeader(Cult cult, Profile profile)
+  {
+    cult.Leader = profile;
+    return cult;
   }
 }
 
