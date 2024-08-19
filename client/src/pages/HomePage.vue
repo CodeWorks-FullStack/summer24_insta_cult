@@ -4,7 +4,7 @@
 
 <template>
   <section>
-    <div class="d-flex d-md-block flex-column justify-content-center">
+    <div class="text-center">
       <RouterLink to="cults">
         <button
           class="btn d-block d-md-inline-block btn-outline-danger text-light fw-bold megrim-font fs-1 mb-3 mb-md-0 me-md-2">
@@ -24,7 +24,6 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
 }
 
 body {
