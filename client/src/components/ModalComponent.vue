@@ -1,5 +1,8 @@
 <script setup>
 defineProps({ modalId: String, showFooter: { type: Boolean, default: false } })
+
+
+
 </script>
 
 

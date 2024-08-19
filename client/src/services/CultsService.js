@@ -4,6 +4,10 @@ import { AppState } from "@/AppState.js"
 import { Cult } from "@/models/Cult.js"
 
 class CultsService {
+  async createCult(cultData) {
+    const response = await api.post('api/cults', cultData)
+    logger.log("CREATED CULT", response.data)
+  }
   async getAllCults() {
     const response = await api.get('api/cults')
     logger.log('GOT ALL CULTS 🧛🧛🧛', response.data)
