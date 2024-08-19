@@ -25,4 +25,16 @@ public class CultsService
     List<Cult> cults = _repository.GetAllCults();
     return cults;
   }
+
+  internal Cult GetCultById(int cultId)
+  {
+    Cult cult = _repository.GetCultById(cultId);
+
+    if (cult == null)
+    {
+      throw new Exception($"No cult found with the id of {cultId}");
+    }
+
+    return cult;
+  }
 }

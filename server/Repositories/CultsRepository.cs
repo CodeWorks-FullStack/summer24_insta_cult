@@ -1,5 +1,6 @@
 
 
+
 namespace insta_cult.Repositories;
 
 public class CultsRepository
@@ -41,6 +42,21 @@ public class CultsRepository
     List<Cult> cults = _db.Query<Cult, Profile, Cult>(sql, JoinLeader).ToList();
 
     return cults;
+  }
+
+  internal Cult GetCultById(int cultId)
+  {
+    string sql = @"
+    SELECT
+    cults.*,
+    accounts.*
+    FROM cults
+    JOIN accounts ON accounts.id = cults.leaderId
+    WHERE cults.id = @cultId;";
+
+    Cult cult = _db.Query<Cult, Profile, Cult>(sql, JoinLeader, new { cultId }).FirstOrDefault();
+
+    return cult;
   }
 
   private Cult JoinLeader(Cult cult, Profile profile)
