@@ -1,5 +1,6 @@
 <script setup>
 import ModalComponent from '@/components/ModalComponent.vue'
+import CultForm from '@/components/CultForm.vue'
 
 </script>
 
@@ -20,7 +21,9 @@ import ModalComponent from '@/components/ModalComponent.vue'
   </section>
   <ModalComponent modalId="createCultModal">
     <template #modalHeader>Create Cult</template>
-    <template #modalBody>FORM</template>
+    <template #modalBody>
+      <CultForm />
+    </template>
   </ModalComponent>
 </template>
 
