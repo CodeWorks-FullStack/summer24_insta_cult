@@ -3,13 +3,16 @@
 </script>
 
 <template>
-  <section class="">
-    <button class="btn btn-outline-danger text-light fw-bold megrim-font fs-1">
-      Join A Cult?
-    </button>
-    <button class="btn btn-outline-danger text-light fw-bold megrim-font fs-1">
-      Start A Cult?
-    </button>
+  <section>
+    <div class="d-flex d-md-block flex-column justify-content-center">
+      <button
+        class="btn d-block d-md-inline-block btn-outline-danger text-light fw-bold megrim-font fs-1 mb-3 mb-md-0 me-md-2">
+        Join A Cult?
+      </button>
+      <button class="btn d-block d-md-inline-block btn-outline-danger text-light fw-bold megrim-font fs-1">
+        Start A Cult?
+      </button>
+    </div>
   </section>
 </template>
 
