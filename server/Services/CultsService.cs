@@ -1,4 +1,7 @@
 
+
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace insta_cult.Services;
 
 public class CultsService
@@ -15,5 +18,11 @@ public class CultsService
   {
     Cult cult = _repository.CreateCult(cultData);
     return cult;
+  }
+
+  internal List<Cult> GetAllCults()
+  {
+    List<Cult> cults = _repository.GetAllCults();
+    return cults;
   }
 }

@@ -29,4 +29,18 @@ public class CultsController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [HttpGet]
+  public ActionResult<List<Cult>> GetAllCults()
+  {
+    try
+    {
+      List<Cult> cults = _cultsService.GetAllCults();
+      return Ok(cults);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }
