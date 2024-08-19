@@ -3,6 +3,7 @@ import { AppState } from '@/AppState.js';
 import { cultsService } from '@/services/CultsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
+import CultCard from '@/components/CultCard.vue'
 
 const cults = computed(() => AppState.cults)
 
@@ -30,9 +31,7 @@ async function getAllCults() {
 
     <section class="row">
       <div v-for="cult in cults" :key="cult.id" class="col-md-7 col-12 m-auto">
-        <div>
-          {{ cult.name }}
-        </div>
+        <CultCard :cult="cult" />
       </div>
     </section>
   </div>
