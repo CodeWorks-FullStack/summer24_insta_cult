@@ -21,6 +21,8 @@ CREATE TABLE
     FOREIGN KEY (leaderId) REFERENCES accounts (id) ON DELETE CASCADE
   );
 
+ALTER TABLE cults MODIFY fee DECIMAL(9, 2);
+
 SELECT
   *
 FROM
