@@ -1,10 +1,13 @@
 import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
+import { AppState } from "@/AppState.js"
+import { Cult } from "@/models/Cult.js"
 
 class CultsService {
   async getAllCults() {
     const response = await api.get('api/cults')
     logger.log('GOT ALL CULTS 🧛🧛🧛', response.data)
+    AppState.cults = response.data.map(cultPOJO => new Cult(cultPOJO))
   }
 }
 
