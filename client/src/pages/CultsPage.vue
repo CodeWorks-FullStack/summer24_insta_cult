@@ -1,10 +1,12 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { cultsService } from '@/services/CultsService.js';
 import Pop from '@/utils/Pop.js';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
+
+const cults = computed(() => AppState.cults)
 
 onMounted(getAllCults)
-
 
 async function getAllCults() {
   try {
@@ -17,12 +19,34 @@ async function getAllCults() {
 
 
 <template>
-  <h1>CULTS PAGE</h1>
+  <div class="container">
+    <section class="row">
+      <div class="col-12">
+        <div class="text-overline">
+          <p class="megrim-font fs-3">Cults Near You</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="row">
+      <div v-for="cult in cults" :key="cult.id" class="col-md-7 col-12 m-auto">
+        <div>
+          {{ cult.name }}
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 
 <style lang="scss">
 #app {
-  background-color: gray;
+  background-color: var(--bs-secondary);
+}
+
+.text-overline {
+  padding: 1rem;
+  width: fit-content;
+  border-top: 3px solid var(--bs-light);
 }
 </style>
