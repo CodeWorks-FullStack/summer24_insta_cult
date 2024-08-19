@@ -1,4 +1,19 @@
-<script setup></script>
+<script setup>
+import { cultsService } from '@/services/CultsService.js';
+import Pop from '@/utils/Pop.js';
+import { onMounted } from 'vue';
+
+onMounted(getAllCults)
+
+
+async function getAllCults() {
+  try {
+    await cultsService.getAllCults()
+  } catch (error) {
+    Pop.error(error)
+  }
+}
+</script>
 
 
 <template>
@@ -6,4 +21,8 @@
 </template>
 
 
-<style scoped></style>
+<style lang="scss">
+#app {
+  background-color: gray;
+}
+</style>
