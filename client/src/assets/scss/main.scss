@@ -1,6 +1,7 @@
 @import "./_variables.scss";
 @import "./_utilities.scss";
 @import "./loaders.scss";
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 
 body {
   overscroll-behavior: none;
@@ -10,7 +11,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--bs-page);
 }
 
 main {
@@ -21,3 +21,8 @@ a {
   text-decoration: none;
 }
 
+.megrim-font {
+  font-family: "Megrim", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
