@@ -5,6 +5,7 @@ import { Cult } from "@/models/Cult.js"
 
 class CultsService {
   async getCultById(cultId) {
+    // AppState.activeCult = null
     const response = await api.get(`api/cults/${cultId}`)
     logger.log('GOT CULT BY ID', response.data)
     AppState.activeCult = new Cult(response.data)

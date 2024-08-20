@@ -53,6 +53,15 @@ async function createCultMember() {
   }
 }
 
+async function removeCultMember(cultMemberId) {
+  try {
+    await cultMembersService.removeCultMember(cultMemberId)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
 </script>
 
 
@@ -82,9 +91,14 @@ async function createCultMember() {
         </div>
         <div class="p-3">
           <h3 class="amarante-font">Members: </h3>
-          <div class="d-flex gap-1">
-            <img v-for="cultist in cultists" :key="cultist.cultMemberId" :src="cultist.picture" :alt="cultist.name"
-              :title="cultist.name" class="cult-member-img round-picture">
+          <div class="d-flex gap-2">
+            <div v-for="cultist in cultists" :key="cultist.cultMemberId" class="position-relative">
+              <img :src="cultist.picture" :alt="cultist.name" :title="cultist.name"
+                class="cult-member-img round-picture">
+              <i v-if="cult.leaderId == account?.id" @click="removeCultMember(cultist.cultMemberId)"
+                class="mdi mdi-close-circle fs-2 text-danger remove-cultist-icon" role="button"
+                :title="`Remove ${cultist.name} from ${cult.name}`"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -128,10 +142,16 @@ async function createCultMember() {
 }
 
 .cult-leader-img {
-  height: 20vh;
+  height: 100px;
 }
 
 .cult-member-img {
-  height: 10vh;
+  height: 75px;
+}
+
+.remove-cultist-icon {
+  position: absolute;
+  top: -8px;
+  right: -4px;
 }
 </style>
