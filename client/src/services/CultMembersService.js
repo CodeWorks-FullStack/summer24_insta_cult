@@ -4,6 +4,10 @@ import { AppState } from "@/AppState.js"
 import { Cultist } from "@/models/Cultist.js"
 
 class CultMembersService {
+  async getMyJoinedCults() {
+    const response = await api.get('account/cultMembers')
+    logger.log('GOT MY JOINED CULTS', response.data)
+  }
   async removeCultMember(cultMemberId) {
     const response = await api.delete(`api/cultMembers/${cultMemberId}`)
     logger.log("REMOVED CULT MEMBER", response.data)

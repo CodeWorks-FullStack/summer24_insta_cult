@@ -1,26 +1,32 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
+import Pop from '@/utils/Pop.js';
+import { cultMembersService } from '@/services/CultMembersService.js';
 
 const account = computed(() => AppState.account)
+
+onMounted(getMyJoinedCults)
+
+async function getMyJoinedCults() {
+  try {
+    await cultMembersService.getMyJoinedCults()
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 
 </script>
 
 <template>
-  <div class="about text-center">
-    <div v-if="account">
-      <h1>Welcome {{ account.name }}</h1>
-      <img class="rounded" :src="account.picture" alt="" />
-      <p>{{ account.email }}</p>
-    </div>
-    <div v-else>
-      <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
-    </div>
+  <div class="container-fluid">
+    <section class="row">
+      <div class="col-12">
+        <h1>Cults You Are a member of</h1>
+      </div>
+    </section>
   </div>
 </template>
 
-<style scoped lang="scss">
-img {
-  max-width: 100px;
-}
-</style>
+<style scoped lang="scss"></style>
