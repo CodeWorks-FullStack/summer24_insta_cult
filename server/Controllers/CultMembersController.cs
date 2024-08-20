@@ -12,4 +12,21 @@ public class CultMembersController : ControllerBase
     _auth0Provider = auth0Provider;
     _cultMembersService = cultMembersService;
   }
+
+  [HttpPost]
+  [Authorize]
+  public async Task<ActionResult<CultMember>> CreateCultMember([FromBody] CultMember cultMemberData)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      cultMemberData.AccountId = userInfo.Id;
+      CultMember cultMember = _cultMembersService.CreateCultMember(cultMemberData);
+      return Ok(cultMember);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }
