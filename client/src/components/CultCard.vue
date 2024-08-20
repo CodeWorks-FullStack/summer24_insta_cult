@@ -1,8 +1,9 @@
 <script setup>
 import { Cult } from '@/models/Cult.js';
+import { JoinedCult } from '@/models/JoinedCult.js';
 import { RouterLink } from 'vue-router';
 
-defineProps({ cult: Cult })
+defineProps({ cult: { type: [Cult, JoinedCult] } })
 </script>
 
 
