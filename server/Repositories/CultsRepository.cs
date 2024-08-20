@@ -14,6 +14,7 @@ public class CultsRepository
 
   internal Cult CreateCult(Cult cultData)
   {
+
     string sql = @"
     INSERT INTO
     cults (name, fee, description, coverImg, leaderId)
