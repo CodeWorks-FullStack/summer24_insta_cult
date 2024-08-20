@@ -104,7 +104,6 @@ async function getCultistsByCultId(cultId) {
 .round-picture {
   aspect-ratio: 1/1;
   border-radius: 50%;
-
 }
 
 .cult-leader-img {

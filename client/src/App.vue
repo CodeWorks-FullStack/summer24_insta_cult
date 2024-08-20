@@ -2,7 +2,7 @@
 import { watch } from 'vue';
 import { AppState } from './AppState.js';
 import Navbar from './components/Navbar.vue'
-import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const route = useRoute()
 
