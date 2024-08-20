@@ -10,6 +10,7 @@ const route = useRoute()
 
 const cult = computed(() => AppState.activeCult)
 
+const cultists = computed(() => AppState.cultists)
 
 watchEffect(() => {
   getCultById(route.params.cultId)
@@ -51,14 +52,19 @@ async function getCultistsByCultId(cultId) {
         </div>
       </div>
     </section>
-    <div class="row border-top border-dark border-5">
+    <section class="row border-top border-dark border-5">
       <div class="col-12 col-md-6 order-md-2">
-        <div class="mb-3">
+        <div class="mb-3 p-3">
           <h2 class="amarante-font">Cult Leader</h2>
-          <img :src="cult.leader.picture" :alt="cult.leader.name">
+          <img :src="cult.leader.picture" :alt="cult.leader.name" class="cult-leader-img round-picture"
+            :title="cult.leader.name">
         </div>
-        <div>
+        <div class="p-3">
           <h3 class="amarante-font">Members: </h3>
+          <div class="d-flex gap-1">
+            <img v-for="cultist in cultists" :key="cultist.cultMemberId" :src="cultist.picture" :alt="cultist.name"
+              :title="cultist.name" class="cult-member-img round-picture">
+          </div>
         </div>
       </div>
       <div class="col-12 col-md-6 order-md-1">
@@ -66,7 +72,7 @@ async function getCultistsByCultId(cultId) {
           <p>{{ cult.description }}</p>
         </div>
       </div>
-    </div>
+    </section>
   </div>
   <div v-else class="container-fluid">
     <section class="row">
@@ -93,5 +99,19 @@ async function getCultistsByCultId(cultId) {
 
 .blur {
   backdrop-filter: blur(6px) grayscale(1);
+}
+
+.round-picture {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+
+}
+
+.cult-leader-img {
+  height: 20vh;
+}
+
+.cult-member-img {
+  height: 10vh;
 }
 </style>
