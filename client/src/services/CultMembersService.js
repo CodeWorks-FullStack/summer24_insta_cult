@@ -7,7 +7,9 @@ class CultMembersService {
   async removeCultMember(cultMemberId) {
     const response = await api.delete(`api/cultMembers/${cultMemberId}`)
     logger.log("REMOVED CULT MEMBER", response.data)
-
+    const cultistIndex = AppState.cultists.findIndex(cultist => cultist.cultMemberId == cultMemberId)
+    if (cultistIndex == -1) throw new Error("You messed up the findIndex, dawg")
+    AppState.cultists.splice(cultistIndex, 1)
   }
   async createCultMember(cultMemberData) {
     const response = await api.post('api/cultMembers', cultMemberData)

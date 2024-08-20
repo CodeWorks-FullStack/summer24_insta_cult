@@ -55,6 +55,8 @@ async function createCultMember() {
 
 async function removeCultMember(cultMemberId) {
   try {
+    const wantsToDelete = await Pop.confirm("Are you sure that this cult member should be removed????")
+    if (!wantsToDelete) return
     await cultMembersService.removeCultMember(cultMemberId)
   }
   catch (error) {
@@ -90,7 +92,7 @@ async function removeCultMember(cultMemberId) {
             :title="cult.leader.name">
         </div>
         <div class="p-3">
-          <h3 class="amarante-font">Members: </h3>
+          <h3 class="amarante-font">Members: {{ cultists.length }}</h3>
           <div class="d-flex gap-2">
             <div v-for="cultist in cultists" :key="cultist.cultMemberId" class="position-relative">
               <img :src="cultist.picture" :alt="cultist.name" :title="cultist.name"
