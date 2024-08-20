@@ -7,6 +7,7 @@ class CultsService {
   async getCultById(cultId) {
     const response = await api.get(`api/cults/${cultId}`)
     logger.log('GOT CULT BY ID', response.data)
+    AppState.activeCult = new Cult(response.data)
   }
   async createCult(cultData) {
     const response = await api.post('api/cults', cultData)
