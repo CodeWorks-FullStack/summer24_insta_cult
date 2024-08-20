@@ -8,9 +8,13 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute()
 
+const account = computed(() => AppState.account)
+
 const cult = computed(() => AppState.activeCult)
 
 const cultists = computed(() => AppState.cultists)
+
+const isCultist = computed(() => cultists.value.some(cultist => account.value?.id == cultist.id))
 
 watchEffect(() => {
   getCultById(route.params.cultId)
@@ -39,6 +43,16 @@ async function getCultistsByCultId(cultId) {
   }
 }
 
+async function createCultMember() {
+  try {
+    const cultMemberData = { cultId: route.params.cultId }
+    await cultMembersService.createCultMember(cultMemberData)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
 </script>
 
 
@@ -48,7 +62,14 @@ async function getCultistsByCultId(cultId) {
       <div class="col-12 h-100 blur d-flex align-items-center">
         <div class="p-5">
           <h1 class="amarante-font">{{ cult.name }}</h1>
-          <button class="btn btn-outline-danger bg-dark amarante-font fs-1">JOIN</button>
+          <button v-if="account && !isCultist" @click="createCultMember()"
+            class="btn btn-outline-danger bg-dark amarante-font fs-1">
+            JOIN
+          </button>
+          <button v-else-if="isCultist" @click="Pop.toast('Nice try loser')"
+            class="btn btn-outline-danger bg-dark amarante-font fs-1" disabled>
+            LEAVE
+          </button>
         </div>
       </div>
     </section>

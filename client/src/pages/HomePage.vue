@@ -1,7 +1,10 @@
 <script setup>
 import ModalComponent from '@/components/ModalComponent.vue'
 import CultForm from '@/components/CultForm.vue'
+import { computed } from 'vue';
+import { AppState } from '@/AppState.js';
 
+const account = computed(() => AppState.account)
 
 
 </script>
@@ -15,7 +18,8 @@ import CultForm from '@/components/CultForm.vue'
           Join A Cult?
         </button>
       </RouterLink>
-      <button class="btn d-block d-md-inline-block btn-outline-danger text-light fw-bold megrim-font fs-1"
+      <button v-if="account"
+        class="btn d-block d-md-inline-block btn-outline-danger text-light fw-bold megrim-font fs-1"
         data-bs-toggle="modal" data-bs-target="#createCultModal">
         Start A Cult?
       </button>
