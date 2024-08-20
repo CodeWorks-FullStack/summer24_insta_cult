@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 import { Cult } from './models/Cult.js'
 import { Cultist } from './models/Cultist.js'
+import { JoinedCult } from './models/JoinedCult.js'
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -13,6 +14,8 @@ export const AppState = reactive({
   /** @type {Cult}*/
   activeCult: null,
   /** @type {Cultist[]}*/
-  cultists: []
+  cultists: [],
+  /** @type {JoinedCult[]}*/
+  myJoinedCults: []
 })
 

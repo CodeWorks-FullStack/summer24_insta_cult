@@ -6,6 +6,8 @@ import { cultMembersService } from '@/services/CultMembersService.js';
 
 const account = computed(() => AppState.account)
 
+const cults = computed(() => AppState.myJoinedCults)
+
 onMounted(getMyJoinedCults)
 
 async function getMyJoinedCults() {
@@ -25,6 +27,9 @@ async function getMyJoinedCults() {
       <div class="col-12">
         <h1>Cults You Are a member of</h1>
       </div>
+    </section>
+    <section class="row">
+      {{ cults }}
     </section>
   </div>
 </template>
