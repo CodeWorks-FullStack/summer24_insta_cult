@@ -57,4 +57,8 @@ public class CultsController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+
+
+
 }
