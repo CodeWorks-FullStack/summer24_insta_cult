@@ -38,11 +38,7 @@ async function getAllCults() {
 </template>
 
 
-<style lang="scss">
-#app {
-  background-color: var(--bs-secondary);
-}
-
+<style scoped lang="scss">
 .text-overline {
   padding: 1rem;
   width: fit-content;

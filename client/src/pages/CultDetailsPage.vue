@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { cultMembersService } from '@/services/CultMembersService.js';
 import { cultsService } from '@/services/CultsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, watchEffect } from 'vue';
@@ -12,6 +13,7 @@ const cult = computed(() => AppState.activeCult)
 
 watchEffect(() => {
   getCultById(route.params.cultId)
+  getCultistsByCultId(route.params.cultId)
 })
 
 // onMounted(() => {
@@ -21,6 +23,15 @@ watchEffect(() => {
 async function getCultById(cultId) {
   try {
     await cultsService.getCultById(cultId)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
+async function getCultistsByCultId(cultId) {
+  try {
+    await cultMembersService.getCultistsByCultId(cultId)
   }
   catch (error) {
     Pop.error(error);
@@ -40,6 +51,22 @@ async function getCultById(cultId) {
         </div>
       </div>
     </section>
+    <div class="row border-top border-dark border-5">
+      <div class="col-12 col-md-6 order-md-2">
+        <div class="mb-3">
+          <h2 class="amarante-font">Cult Leader</h2>
+          <img :src="cult.leader.picture" :alt="cult.leader.name">
+        </div>
+        <div>
+          <h3 class="amarante-font">Members: </h3>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 order-md-1">
+        <div>
+          <p>{{ cult.description }}</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div v-else class="container-fluid">
     <section class="row">

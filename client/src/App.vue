@@ -1,6 +1,14 @@
 <script setup>
+import { watch } from 'vue';
 import { AppState } from './AppState.js';
 import Navbar from './components/Navbar.vue'
+import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
+
+const route = useRoute()
+
+watch(() => route.name, () => {
+  document.body.className = route.name?.toString().toLowerCase()
+}, { immediate: true })
 
 </script>
 
