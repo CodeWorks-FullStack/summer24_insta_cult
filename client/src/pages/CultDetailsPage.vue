@@ -3,7 +3,7 @@ import { AppState } from '@/AppState.js';
 import { cultMembersService } from '@/services/CultMembersService.js';
 import { cultsService } from '@/services/CultsService.js';
 import Pop from '@/utils/Pop.js';
-import { computed, watchEffect } from 'vue';
+import { computed, watch, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
@@ -16,14 +16,10 @@ const cultists = computed(() => AppState.cultists)
 
 const isCultist = computed(() => cultists.value.some(cultist => account.value?.id == cultist.id))
 
-watchEffect(() => {
-  getCultById(route.params.cultId)
-  getCultistsByCultId(route.params.cultId)
-})
-
-// onMounted(() => {
-//   getCultById(route.params.cultId)
-// })
+watch(() => route.params.cultId, (cultId) => {
+  getCultById(cultId)
+  getCultistsByCultId(cultId)
+}, { immediate: true })
 
 async function getCultById(cultId) {
   try {
@@ -105,7 +101,7 @@ async function removeCultMember(cultMemberId) {
         </div>
       </div>
       <div class="col-12 col-md-6 order-md-1">
-        <div>
+        <div class="p-3 amarante-font">
           <p>{{ cult.description }}</p>
         </div>
       </div>

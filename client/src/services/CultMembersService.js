@@ -23,9 +23,10 @@ class CultMembersService {
     AppState.cultists.push(new Cultist(response.data))
   }
   async getCultistsByCultId(cultId) {
-    AppState.cultists = [] // <--rad
+    // AppState.cultists = [] // <--rad
+    AppState.cultists.length = 0 //<--radder
     const response = await api.get(`api/cults/${cultId}/cultMembers`)
-    logger.log('GOT CULTISTS', response.data)
+    logger.log('GOT CULTISTS')
     AppState.cultists = response.data.map(cultistPOJO => new Cultist(cultistPOJO))
   }
 }
