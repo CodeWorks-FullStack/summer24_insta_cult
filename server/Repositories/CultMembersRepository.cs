@@ -62,17 +62,20 @@ public class CultMembersRepository
     string sql = @"
     SELECT
     cultMembers.*,
-    cults.*
+    cults.*,
+    accounts.*
     FROM cultMembers
     JOIN cults ON cults.id = cultMembers.cultId
+    JOIN accounts ON accounts.id = cults.leaderId 
     WHERE cultMembers.accountId = @userId;";
 
-    List<JoinedCult> joinedCults = _db.Query<CultMember, JoinedCult, JoinedCult>(sql,
-     (cultMember, cult) =>
+    List<JoinedCult> joinedCults = _db.Query<CultMember, JoinedCult, Profile, JoinedCult>(sql,
+     (cultMember, cult, leader) =>
      {
        cult.CultMemberId = cultMember.Id;
        cult.CultId = cultMember.CultId;
        cult.AccountId = cultMember.AccountId;
+       cult.Leader = leader;
        return cult;
      }, new { userId }).ToList();
 
