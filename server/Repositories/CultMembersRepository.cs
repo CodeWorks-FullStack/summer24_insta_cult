@@ -1,6 +1,8 @@
 
 
 
+
+
 namespace insta_cult.Repositories;
 
 public class CultMembersRepository
@@ -36,6 +38,22 @@ public class CultMembersRepository
     return cultist;
   }
 
+  internal void DestroyCultMember(int cultMemberId)
+  {
+    string sql = "DELETE FROM cultMembers WHERE id = @cultMemberId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { cultMemberId });
+
+    if (rowsAffected == 0)
+    {
+      throw new Exception("DELETE FAILED. CHECK YOUR SQL MANUAL AND YOUR SQL SYNTAX FOR THE ERROR");
+    }
+    if (rowsAffected > 1)
+    {
+      throw new Exception("DELETED MORE THAN ONE ROW. CHECK YOUR SQL MANUAL AND YOUR SQL SYNTAX FOR THE ERROR");
+    }
+  }
+
   internal List<Cultist> GetCultistsByCultId(int cultId)
   {
     string sql = @"
@@ -55,6 +73,15 @@ public class CultMembersRepository
       //   {cultId: 8}
     }, new { cultId }).ToList();
     return cultists;
+  }
+
+  internal CultMember GetCultMemberById(int cultMemberId)
+  {
+    string sql = "SELECT * FROM cultMembers WHERE id = @cultMemberId;";
+
+    CultMember cultMember = _db.Query<CultMember>(sql, new { cultMemberId }).FirstOrDefault();
+
+    return cultMember;
   }
 
   internal List<JoinedCult> GetMyJoinedCults(string userId)
