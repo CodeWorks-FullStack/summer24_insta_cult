@@ -1,5 +1,6 @@
 <script setup>
 import { Cult } from '@/models/Cult.js';
+import { RouterLink } from 'vue-router';
 
 defineProps({ cult: Cult })
 </script>
@@ -16,7 +17,9 @@ defineProps({ cult: Cult })
       <p class="fs-4 megrim-font">{{ cult.name }}</p>
       <p>{{ cult.description }}</p>
       <div class="text-end">
-        <button class="btn btn-danger text-light fs-5">See More</button>
+        <RouterLink :to="{ name: 'Cult Details', params: { cultId: cult.id } }">
+          <button class="btn btn-danger text-light fs-5">See More</button>
+        </RouterLink>
       </div>
     </div>
   </div>

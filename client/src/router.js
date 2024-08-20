@@ -17,6 +17,11 @@ const routes = [
     component: loadPage('CultsPage')
   },
   {
+    path: '/cults/:cultId',
+    name: 'Cult Details',
+    component: loadPage('CultDetailsPage')
+  },
+  {
     path: '/account',
     name: 'Account',
     component: loadPage('AccountPage'),
