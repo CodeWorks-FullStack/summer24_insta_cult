@@ -9,7 +9,8 @@ defineProps({ cult: Cult })
 <template>
   <div class="cult-card text-light">
     <div class="p-3 d-flex align-items-center gap-2">
-      <img :src="cult.leader.picture" :alt="cult.leader.name" class="profile-img">
+      <img :src="cult.leader.picture" :alt="cult.leader.name" class="profile-img"
+        :class="{ 'upside-down': cult.leader.trimmedName == 'jakeunderall' }">
       <p class="megrim-font fs-3 mb-0">{{ cult.leader.trimmedName }}</p>
     </div>
     <img :src="cult.coverImg" :alt="'Cover image of the ' + cult.name + ' cult.'" class="cult-cover-img">
@@ -46,5 +47,9 @@ defineProps({ cult: Cult })
   filter: grayscale(1);
   height: 45vh;
   object-fit: cover;
+}
+
+.upside-down {
+  transform: rotate(180deg);
 }
 </style>
